@@ -4,7 +4,6 @@ const Shop=require('../models/Shop');
 const passport=require('passport');
 const auth=require('../config/auth');
 
-
 router.get('/login',auth.Shop.revauthCheck,(req,res)=>{
   res.render('shop-login');
 });
@@ -17,7 +16,7 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/profile',(req,res)=>{
+router.get('/profile',auth.Shop.authCheck,(req,res)=>{
   res.render('profileUpdate-shop');
 });
 

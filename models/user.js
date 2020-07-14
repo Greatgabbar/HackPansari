@@ -10,9 +10,17 @@ const userSchema= new Schema({
     default : Date.now
   },
   googleid : String,
-  image : String
+  image : String,
+  username:String,
+  City :String,
+  State : String,
+  Area : String,
+  Updated : {
+    type:Boolean,
+    default: false
+  }
 });
 
-const User=mongoose.model('auth',userSchema);
+const User=mongoose.model('user',userSchema);
 
 module.exports = User;
