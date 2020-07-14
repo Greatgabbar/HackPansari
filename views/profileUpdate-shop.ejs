@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <title>Profile Update</title>
+</head>
+<body class="bg-gray-500 mx-8 mr-24">
+  <div class="card my-12 mx-8 h-full w-full shadow-md bg-white">
+    <h1 class="text-black font-semibold text-4xl text-center p-4">Update Your Profile</h1>
+    <form class="flex flex-wrap" method="POST">
+      <div class="name w-full md:w-1/2 px-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="shopname">
+          Shop Name
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="shopname" name="shopname" type="text" value="<%=typeof shopname!='undefined' ? shopname : ''%>" placeholder="Shop Name">
+      </div>
+      <div class="pass w-full md:w-1/2 px-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+          Password
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" value="<%=typeof password!='undefined' ? password : ''%>" name="password" placeholder="*********">
+      </div>
+      <div class="Area w-full md:w-1/2 p-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="area">
+          Area
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="area" type="text" value="<%=typeof area!='undefined' ? area : ''%>" name="area" placeholder="Enter your location ...">
+      </div>
+      <div class="city w-full md:w-1/2 p-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="city">
+          City
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="city" type="text" value="<%=typeof city!='undefined' ? city : ''%>" name="city" placeholder="City">
+      </div>
+      <div class="state w-full md:w-1/2 p-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="state">
+          State
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="state" type="text" value="<%=typeof state!='undefined' ? state : ''%>" name="state" placeholder="State">
+      </div>
+      <div class="image w-full md:w-1/2 p-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
+          Image
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image" type="text" value="<%=typeof image!='undefined' ? image : ''%>" name="image" placeholder="Image Url ...">
+      </div>
+      <div class="button flex justify-center">
+        <button type="submit"
+        class="py-2 px-4 m-4 bg-transparent text-grey-600 font-semibold border border-gray-600 rounded hover:bg-gray-900 hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0">Update Profile</button>
+      </div>
+    </form>
+  </div>  
+</body>
+</html>
