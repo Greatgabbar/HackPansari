@@ -19,7 +19,7 @@ passport.use(new googleStrategy({
   clientSecret : keys.google.clientSecret,
   callbackURL :'/auth/google/redirect',
 },(accessToken,refreshToken,profile,done)=>{
-  User.findOne({googleid : profile.id}).then((data)=>{
+  User.findOne({email : profile.emails[0].value}).then((data)=>{
     if(data){
       // console.log('User Already Existed : ' + data);
       done(null,data);
@@ -28,7 +28,8 @@ passport.use(new googleStrategy({
         googleid : profile.id,
         name : profile.displayName,
         image : profile._json.picture,
-        email : profile.emails[0].value
+        email : profile.emails[0].value,
+        Updated : false
       }).save().then((nwUser)=>{
         // console.log('New user registerd : ' + nwUser);
         done(null,nwUser);

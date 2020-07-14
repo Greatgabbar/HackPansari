@@ -17,11 +17,21 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/profile',auth.User.authCheck,(req,res)=>{
+
+
+router.get('/profile-update',auth.User.authCheck,(req,res)=>{
   res.render('profileUpdate-user');
 });
 
-router.post('/profile',(req,res)=>{
+
+
+router.get('/profile',auth.User.authCheck,(req,res)=>{
+  res.render('user-profile',{user : req.user});
+})
+
+
+
+router.post('/profile-update',(req,res)=>{
   const err=[];
   const {password,username,area,city,state,image} = req.body;
   if(!password || !username || !area || !state || !city || !image){
@@ -62,10 +72,10 @@ router.post('/profile',(req,res)=>{
 router.get('/dashboard',auth.User.authCheck,(req,res)=>{
   console.log(req.user);
   if(req.user.Updated){
-    res.render('dashboard-user')
+    res.render('dashboard-user',{user : req.user})
     return;
   }
-  res.redirect('/user/profile');
+  res.redirect('/user/profile-update');
 })
 
 router.get('/logout',(req,res)=>{
@@ -92,7 +102,7 @@ router.post('/signup',(req,res)=>{
   }
  
   if(err.length>0){
-    res.render('signup',{
+    res.render('signup-customer',{
       name,
       email,
       pass,
@@ -103,7 +113,7 @@ router.post('/signup',(req,res)=>{
     User.findOne({email : email}).then((user)=>{
       if(user){
         err.push('Email already registered');
-        res.render('signup',{
+        res.render('signup-customer',{
           name,
           email,
           pass,
