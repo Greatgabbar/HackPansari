@@ -58,7 +58,7 @@ app.get('/api/users',(req,res)=>{
 
 
 app.get('/',(req,res)=>{
-  res.render('profileUpdate-shop');
+  res.render('shop-contomer');
 })
 app.get('/user/profile/:id  ',(req,res)=>{
   res.render('dashboard-user');
@@ -67,26 +67,3 @@ app.get('/user/profile/:id  ',(req,res)=>{
 const server=app.listen(4000,function(){
   console.log('running on port number 4000');
 });
-
-const io=socket(server);
-
-io.on('connection',(socket)=>{
-  console.log('connection made');
-  socket.on('output',()=>{
-    Chat.find().limit(100).sort({id:1}).then((data)=>{
-      socket.emit('output',data);
-    })
-  })
-  
-  socket.on('chat',function(message){
-     const chat=new Chat({
-       email : message.email,
-       handler : message.name,
-       message : message.message
-     })
-
-     chat.save().then((data)=>{
-       io.sockets.emit('chat',data);
-     })
-  });
-})

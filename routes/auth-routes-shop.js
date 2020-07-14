@@ -11,7 +11,7 @@ router.get('/google/redirect',passport.authenticate('google'),(req,res)=>{
   Shop.findOne({email : req.user.email})
     .then((user)=>{
       if(user){
-        res.redirect('/user/dashboard');
+        res.redirect('/shop/dashboard');
         return;
       }
       res.redirect('/shop/profile');

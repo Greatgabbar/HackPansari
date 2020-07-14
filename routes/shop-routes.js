@@ -24,30 +24,39 @@ router.get('/profile',(req,res)=>{
 router.post('/profile',(req,res)=>{
   const err=[];
   const {password,shopname,area,city,state,image} = req.body;
+  if(!password || !shopname || !area || !state || !city || !image){
+    err.push('All fields are required');
+  }
   if(password.length <6){
     err.push('Password Should be 6 character long');
   }  
-  if(err.length>0){
-    res.render('profileUpdate-shop',{
-      password,
-      shopname,
-      city,
-      state,
-      image,
-      area,
-      err
-    });
-  }else{
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(password, salt, function(err, hash) { 
-          Shop.findOneAndUpdate({email : req.user.email},{$set:{password : hash,shopname,Area : area,City : city,State:state,image}},{upsert:true}).then((data)=>{
-             console.log('data update :::' + data);
-             res.redirect('/shop/dashboard');
-          }) 
-      });
-  });
-  }
+  Shop.findOne({shopname})
+    .then((user)=>{
+      if(user){
+        err.push('Shopname is not Available');
+      }
 
+      if(err.length>0){
+        res.render('profileUpdate-shop',{
+          password,
+          shopname,
+          city,
+          state,
+          image,
+          area,
+          err
+        });
+      }else{
+        bcrypt.genSalt(10, function(err, salt) {
+          bcrypt.hash(password, salt, function(err, hash) { 
+              Shop.findOneAndUpdate({email : req.user.email},{$set:{password : hash,shopname,Area : area,City : city,State:state,image}},{upsert:true}).then((data)=>{
+                 console.log('data update :::' + data);
+                 res.redirect('/shop/dashboard');
+              }) 
+          });
+      });
+      }
+    })
 })
 
 router.get('/dashboard',auth.Shop.authCheck,(req,res)=>{
