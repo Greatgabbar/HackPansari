@@ -93,7 +93,8 @@ app.post('/api/order',(req,res)=>{
     to:to.id,
     from:from.id,
     fromName: from.name,
-    fromLocation: from.location
+    fromLocation: from.location,
+    fromEmail:from.email
   })
   order.save().then((data)=>{
     res.send(data);
@@ -101,9 +102,14 @@ app.post('/api/order',(req,res)=>{
 }) 
 
 app.get('/',(req,res)=>{
+  res.sendFile(__dirname+'/public/assets/home_page/home.html')
+})
+
+app.get('/both',(req,res)=>{
   res.render('shop-contomer');
 })
-app.get('/user/profile/:id  ',(req,res)=>{
+
+app.get('/user/profile/:id',(req,res)=>{
   res.render('dashboard-user');
 })
 

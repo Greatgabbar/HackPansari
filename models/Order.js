@@ -25,7 +25,8 @@ const orderSchema=new Schema({
     default:Date.now()
   },
   fromLocation:String,
-  fromName:String
+  fromName:String,
+  fromEmail:String
 });
 
 const Order=mongoose.model('order',orderSchema);

@@ -62,7 +62,13 @@ router.post('/profile-update',(req,res)=>{
 
 router.get('/dashboard',auth.Shop.authCheck,(req,res)=>{
    if(req.user.Updated){
-     res.render('dashboard-shop',{user:req.user});
+     Order.find({to:req.user.id})
+       .then((data)=>{
+         res.render('dashboard-shop',{
+           user:req.user,
+           orders:data
+          });
+       })
      return;
    }
   res.redirect('/shop/profile-update')
