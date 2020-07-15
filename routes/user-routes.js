@@ -22,7 +22,7 @@ router.post('/login', (req, res, next) => {
 
 
 router.get('/profile-update',auth.User.authCheck,(req,res)=>{
-  res.render('profileUpdate-user');
+  res.render('profileUpdate-user',{user:req.user});
 });
 
 
@@ -61,7 +61,7 @@ router.post('/profile-update',(req,res)=>{
       }else{
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash(password, salt, function(err, hash) { 
-              User.findOneAndUpdate({email : req.user.email},{$set:{password : hash,username : username,Area : area,City : city,State:state,image,Updated : true}},{upsert:true,new:true}).then((err,data)=>{
+              User.findOneAndUpdate({email : req.user.email},{$set:{pass: hash,username : username,Area : area,City : city,State:state,image,Updated : true}},{upsert:true,new:true}).then((err,data)=>{
                  console.log('data update :::' + data);
                  res.redirect('/user/dashboard');
               }) 

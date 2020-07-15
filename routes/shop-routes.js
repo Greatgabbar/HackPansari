@@ -48,7 +48,7 @@ router.post('/profile-update',(req,res)=>{
       }else{
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash(password, salt, function(err, hash) { 
-              Shop.findOneAndUpdate({email : req.user.email},{$set:{password : hash,shopname,Area : area,City : city,State:state,image,Updated:true}},{upsert:true,new:true}).then((data)=>{
+              Shop.findOneAndUpdate({email : req.user.email},{$set:{pass : hash,shopname,Area : area,City : city,State:state,image,Updated:true}},{upsert:true,new:true}).then((data)=>{
                  console.log('data update :::' + data);
                  res.redirect('/shop/dashboard');
               }) 
@@ -60,7 +60,7 @@ router.post('/profile-update',(req,res)=>{
 
 router.get('/dashboard',auth.Shop.authCheck,(req,res)=>{
    if(req.user.Updated){
-     res.render('dashboard',{user:req.user});
+     res.render('dashboard-shop',{user:req.user});
      return;
    }
   res.redirect('/shop/profile-update')

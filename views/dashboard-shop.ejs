@@ -31,20 +31,20 @@
       <h3> Pansari</h3>
     </div>
     <div class="right_area">
-      <a href="#" class="logout_btn">Logout</a>
+      <a href="/shop/logout" class="logout_btn">Logout</a>
     </div>
   </header>
   <!--header area end-->
   <!--sidebar start-->
   <div class="sidebar">
     <center>
-      <img src="https://dl.dropboxusercontent.com/s/kst7tenijxc1fca/12.jpg?dl=0" class="profile_image" alt="">
-      <h4>Shop Owner</h4>
+      <img src="<%=user.image%>" class="profile_image" alt="">
+      <h4><%=user.shopname%></h4>
     </center>
     <a href="#"><i class="fa fa-desktop"></i><span>Dashboard</span></a>
     <a href="profileUpdate-shop.ejs"><i class="fa fa-sliders"></i><span>Profile</span></a>
     <a href="history-shop.ejs"><i class="fa fa-history"></i><span>History</span></a>
-    <a href="#"><i class="fa fa-sign-out"></i><span>Logout</span></a>
+    <a href="/shop/logout"><i class="fa fa-sign-out"></i><span>Logout</span></a>
   </div>
   <!--sidebar end-->
 
