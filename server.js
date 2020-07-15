@@ -48,6 +48,9 @@ app.use('/shop',require('./routes/shop-routes'));
 app.get('/jayant',(req,res)=>{
   res.render('dashboard-shop');
 })
+app.get('/jayant/history',(req,res)=>{
+  res.render('history-shop');
+})
 
 app.get('/',(req,res)=>{
   res.render('profileUpdate-shop');
