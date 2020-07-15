@@ -12,6 +12,7 @@ const shopSchema= new Schema({
   googleid : String,
   shopname : String,
   image : String,
+  Updated:String,
   City :String,
   State : String,
   Area : String,

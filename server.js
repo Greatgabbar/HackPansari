@@ -1,13 +1,12 @@
 const express=require('express');
 const app=express();
 const passport=require('passport');
-const mongoose=require('mongoose');
-const socket=require('socket.io');  
+const mongoose=require('mongoose'); 
 const flash=require('connect-flash');
 const session=require('express-session');
 const auth=require('./config/auth');
-const Chat=require('./models/chat');
 const passportSetup = require('./config/passport-setup-shop');
+const Shop=require('./models/Shop');
 require('./config/passport-setup-shop-local')(passport);
 
 mongoose.connect('mongodb+srv://root:9755@cluster0-n1q9f.mongodb.net/test?retryWrites=true&w=majority',{
@@ -46,8 +45,11 @@ app.use('/auth',require('./routes/auth-routes-shop'));
 app.use('/shop',require('./routes/shop-routes'));
 
 
-app.get('/',(req,res)=>{
-  res.render('profileUpdate-shop');
+app.get('/api/shops',(req,res)=>{
+  Shop.find({})
+    .then((data)=>{
+      res.status(200).json(data);
+    })
 })
 
 const server=app.listen(5000,function(){

@@ -16,11 +16,11 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/profile',auth.Shop.authCheck,(req,res)=>{
+router.get('/profile-update',auth.Shop.authCheck,(req,res)=>{
   res.render('profileUpdate-shop');
 });
 
-router.post('/profile',(req,res)=>{
+router.post('/profile-update',(req,res)=>{
   const err=[];
   const {password,shopname,area,city,state,image} = req.body;
   if(!password || !shopname || !area || !state || !city || !image){
@@ -48,7 +48,7 @@ router.post('/profile',(req,res)=>{
       }else{
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash(password, salt, function(err, hash) { 
-              Shop.findOneAndUpdate({email : req.user.email},{$set:{password : hash,shopname,Area : area,City : city,State:state,image}},{upsert:true}).then((data)=>{
+              Shop.findOneAndUpdate({email : req.user.email},{$set:{password : hash,shopname,Area : area,City : city,State:state,image,Updated:true}},{upsert:true,new:true}).then((data)=>{
                  console.log('data update :::' + data);
                  res.redirect('/shop/dashboard');
               }) 
@@ -65,7 +65,7 @@ router.get('/dashboard',auth.Shop.authCheck,(req,res)=>{
         res.render('dashboard',{user : req.user});
         return;
       }
-      res.redirect('/shop/profile');
+      res.redirect('/shop/profile-update');
     })
 })
 
@@ -88,7 +88,7 @@ router.post('/signup',(req,res)=>{
   if(pass!==re_pass){
     err.push('Password Doesn\'t Match');
   }
-  if(pass.length <6){
+  if(pass.length < 6){
     err.push('Password Should be 6 character long');
   }
  
