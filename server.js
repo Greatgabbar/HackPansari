@@ -45,12 +45,7 @@ app.use('/auth',require('./routes/auth-routes-shop'));
 app.use('/shop',require('./routes/shop-routes'));
 
 
-app.get('/api/shops',(req,res)=>{
-  Shop.find({})
-    .then((data)=>{
-      res.status(200).json(data);
-    })
-})
+
 
 const server=app.listen(5000,function(){
   console.log('running on port number 5000');
