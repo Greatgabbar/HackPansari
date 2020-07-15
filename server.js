@@ -51,6 +51,9 @@ app.get('/jayant',(req,res)=>{
 app.get('/jayant/history',(req,res)=>{
   res.render('history-shop');
 })
+app.get('/jayant/profile',(req,res)=>{
+  res.render('profile-shop');
+})
 
 app.get('/',(req,res)=>{
   res.render('profileUpdate-shop');
