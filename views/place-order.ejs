@@ -107,12 +107,11 @@
 
     document.getElementById('lol').addEventListener('click',async (e)=>{
       e.preventDefault();
-      order.push({
-        details:{
-          from:"<%=shop_id%>",
-          to:"<%=cust_id%>"
-        }
-      });
+      let data={
+        orders:order,
+        from:"<%=cust_id%>",
+        to:"<%=shop_id%>"
+      }
       console.log(2,order);
 
      const res=await fetch('/api/order',{

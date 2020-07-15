@@ -61,14 +61,17 @@ app.get('/api/users',(req,res)=>{
   res.json(req.user);
 })
 
-app.post('/api/order',(req,res)=>{;
+app.post('/api/order',(req,res)=>{
+  const {orders,to,from} = req.body;
   const order=new Order({
-    order:req.body
+    order:orders,
+    to:to,
+    from:from
   })
   order.save().then((data)=>{
     res.send(data);
   })
-})
+}) 
 
 app.get('/',(req,res)=>{
   res.render('shop-contomer');

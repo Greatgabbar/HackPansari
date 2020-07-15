@@ -4,7 +4,7 @@ const Schema=mongoose.Schema;
 
 const orderSchema=new Schema({
   order:{
-    type : Object,
+    type : Array,
   },
   orderCompleted:{
     type : Boolean,
@@ -13,6 +13,12 @@ const orderSchema=new Schema({
   orderAccepted:{
     type : Boolean,
     default: false
+  },
+  from:{
+    type:String
+  },
+  to:{
+    type:String
   }
 });
 

@@ -13,7 +13,7 @@ router.get('/login',auth.User.revauthCheck,(req,res)=>{
 
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/user/dashboard',
+    successRedirect: '/user/dashboard', 
     failureRedirect: '/user/login',
     failureFlash :true
   })(req, res, next);
