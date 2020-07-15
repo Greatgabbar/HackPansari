@@ -54,12 +54,7 @@ app.get('/jayant/profile',(req,res)=>{
   res.render('profile-shop');
 })
 
-app.get('/api/shops',(req,res)=>{
-  Shop.find({})
-    .then((data)=>{
-      res.status(200).json(data);
-    })
-})
+
 
 const server=app.listen(5000,function(){
   console.log('running on port number 5000');

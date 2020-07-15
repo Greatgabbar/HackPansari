@@ -4,6 +4,8 @@ const bcrypt=require('bcrypt');
 const User=require('../models/user');
 const passport=require('passport');
 const auth=require('../config/auth');
+const Shop=require('../models/Shop');
+
 
 router.get('/login',auth.User.revauthCheck,(req,res)=>{
   res.render('login-customer');
@@ -68,6 +70,19 @@ router.post('/profile-update',(req,res)=>{
       }
     })
 })
+
+
+router.get('/dashboard/:id',(req,res)=>{
+  res.render('place-order',{
+    shop_id:req.params.id,
+    cust_id:req.user.id
+  });
+})
+
+router.post('/',(req,res)=>{
+  res.redirect('/user/dashboard-user');
+})
+
 
 router.get('/dashboard',auth.User.authCheck,(req,res)=>{
   console.log(req.user);
