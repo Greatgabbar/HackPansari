@@ -85,9 +85,14 @@ router.post('/',(req,res)=>{
 
 
 router.get('/dashboard',auth.User.authCheck,(req,res)=>{
-  console.log(req.user);
   if(req.user.Updated){
-    res.render('dashboard-user',{user : req.user})
+    Shop.find({}).then((data)=>{
+      console.log(data);
+      res.render('dashboard-user',{
+        user : req.user,
+        shopData : data
+      });
+    })
     return;
   }
   res.redirect('/user/profile-update');

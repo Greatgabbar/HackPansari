@@ -53,20 +53,17 @@ router.post('/profile-update',(req,res)=>{
                  res.redirect('/shop/dashboard');
               }) 
           });
-      });
+      }); 
       }
     })
 })
 
 router.get('/dashboard',auth.Shop.authCheck,(req,res)=>{
-  Shop.findOne({City :req.user.City})
-    .then((user)=>{
-      if(user){
-        res.render('dashboard',{user : req.user});
-        return;
-      }
-      res.redirect('/shop/profile-update');
-    })
+   if(req.user.Updated){
+     res.render('dashboard',{user:req.user});
+     return;
+   }
+  res.redirect('/shop/profile-update')
 })
 
 router.get('/logout',(req,res)=>{

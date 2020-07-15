@@ -63,6 +63,7 @@ app.get('/api/users',(req,res)=>{
 
 app.post('/api/order',(req,res)=>{
   const {orders,to,from} = req.body;
+  console.log(req.body);
   const order=new Order({
     order:orders,
     to:to,
