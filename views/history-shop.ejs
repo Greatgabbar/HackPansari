@@ -56,20 +56,19 @@
                 </tr>
             </thead>
             <!-- Repeat here -->
-            <tr>
-                <td>{{rid}}</td>
-                <td>{{customer name}}</td>
-                <td>{{location}}</td>
-                <td>{{dop}}</td>
-                <td>{{status}}</td>
-            </tr>
-            <tr>
-                <td>{{rid}}</td>
-                <td>{{customer name}}</td>
-                <td>{{location}}</td>
-                <td>{{dop}}</td>
-                <td>{{status}}</td>
-            </tr>
+            <%data.forEach((order)=>{%>
+                <tr>
+                    <td><%=order.id%></td>
+                    <td><%=order.fromName%></td>
+                    <td><%=order.fromLocation%></td>
+                    <td><%=order.date%></td>
+                    <%if(order.orderCompleted){%>
+                        <td>Completed</td>
+                    <%}else{%>
+                        <td>Pending</td>
+                    <%}%>
+                </tr>
+            <%})%>
         </table>
     </div>
 

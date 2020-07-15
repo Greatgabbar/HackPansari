@@ -3,6 +3,8 @@ const bcrypt=require('bcrypt');
 const Shop=require('../models/Shop');
 const passport=require('passport');
 const auth=require('../config/auth');
+const Order=require('../models/Order');
+
 
 router.get('/login',auth.Shop.revauthCheck,(req,res)=>{
   res.render('shop-login');
@@ -64,6 +66,20 @@ router.get('/dashboard',auth.Shop.authCheck,(req,res)=>{
      return;
    }
   res.redirect('/shop/profile-update')
+})
+
+
+router.get('/history',auth.Shop.authCheck,(req,res)=>{
+Order.find({to:req.user.id})
+  .then((data)=>{
+    res.render('history-shop',{
+      data
+    });
+  })
+})
+
+router.get('/profile',auth.Shop.authCheck,(req,res)=>{
+  res.render('profileUpdate-shop')
 })
 
 router.get('/logout',(req,res)=>{

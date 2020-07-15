@@ -91,7 +91,9 @@ app.post('/api/order',(req,res)=>{
   const order=new Order({
     order:orders,
     to:to.id,
-    from:from.id
+    from:from.id,
+    fromName: from.name,
+    fromLocation: from.location
   })
   order.save().then((data)=>{
     res.send(data);

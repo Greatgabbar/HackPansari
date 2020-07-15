@@ -19,7 +19,13 @@ const orderSchema=new Schema({
   },
   to:{
     type:String
-  }
+  },
+  date:{
+    type:Date,
+    default:Date.now()
+  },
+  fromLocation:String,
+  fromName:String
 });
 
 const Order=mongoose.model('order',orderSchema);
