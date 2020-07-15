@@ -109,8 +109,13 @@
       e.preventDefault();
       let data={
         orders:order,
-        from:"<%=cust_id%>",
-        to:"<%=shop_id%>"
+        from:{
+          id:"<%=cust_id%>",
+          email:"<%=cust_email%>"
+        },
+        to:{
+          id:"<%=shop_id%>",
+        }
       }
       console.log(2,data);
 

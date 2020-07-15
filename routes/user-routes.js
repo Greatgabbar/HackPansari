@@ -75,7 +75,8 @@ router.post('/profile-update',(req,res)=>{
 router.get('/dashboard/:id',(req,res)=>{
   res.render('place-order',{
     shop_id:req.params.id,
-    cust_id:req.user.id
+    cust_id:req.user.id,
+    cust_email:req.user.email
   });
 })
 

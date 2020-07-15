@@ -12,6 +12,17 @@ const Chat=require('./models/chat');
 const passportSet=require('./config/passport-setup');
 require('./config/passport-setup-local')(passport);
 const Order=require('./models/Order');
+const nodemailer=require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: process.env.EMAIL || 'customer.pansari@gmail.com', 
+      pass: process.env.PASSWORD || 'Pansari@123'
+  }
+});
+
+
 
 mongoose.connect('mongodb+srv://root:9755@cluster0-n1q9f.mongodb.net/test?retryWrites=true&w=majority',{
   useNewUrlParser: true,
@@ -63,11 +74,24 @@ app.get('/api/users',(req,res)=>{
 
 app.post('/api/order',(req,res)=>{
   const {orders,to,from} = req.body;
-  console.log(req.body);
+  const mailOptions = {
+    from: 'customer.pansari@gmail.com', 
+    to: from.email,
+    subject: "Order Recieved",
+    text: 'We Have Recieved your order and we are processing it'
+  };
+  transporter.sendMail(mailOptions,(err,data)=>{
+    if(err){
+      console.log(err);
+    }else{
+      console.log('email sent!!!',data);
+    }
+  })
+
   const order=new Order({
     order:orders,
-    to:to,
-    from:from
+    to:to.id,
+    from:from.id
   })
   order.save().then((data)=>{
     res.send(data);
