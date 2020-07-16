@@ -43,18 +43,6 @@ app.use((req,res,next)=>{
 app.use('/auth',require('./routes/auth-routes-shop'));
 
 app.use('/shop',require('./routes/shop-routes'));
-// !Delete these only
-app.get('/jayant',(req,res)=>{
-  res.render('dashboard-shop');
-})
-app.get('/jayant/history',(req,res)=>{
-  res.render('history-shop');
-})
-app.get('/jayant/profile',(req,res)=>{
-  res.render('profile-shop');
-})
-
-
 
 const server=app.listen(5000,function(){
   console.log('running on port number 5000');

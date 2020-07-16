@@ -19,13 +19,13 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/profile-update',auth.Shop.authCheck,(req,res)=>{
-  res.render('profileUpdate-shop');
+  res.render('profileUpdate-shop',{user:req.user});
 });
 
 router.post('/profile-update',(req,res)=>{
   const err=[];
   const {password,shopname,area,city,state,image} = req.body;
-  if(!password || !shopname || !area || !state || !city || !image){
+  if(!password || !shopname || !area || !state || !city){
     err.push('All fields are required');
   }
   if(password.length <6){
