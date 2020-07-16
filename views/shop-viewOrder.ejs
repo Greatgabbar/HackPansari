@@ -72,15 +72,15 @@
             </table>
             <div class="text-center m-3">
                <!-- form -->
-<form id="form" method="POST">
+<form id="form">
     <div class="form-row align-items-center">
       <div class="col-auto my-1">
         <div class="form-group">
-            <label for="exampleFormControlInput1">Email address</label>
-            <input type="email" class="form-control" name="email" id="exampleFormControlInput1" value="<%=order.fromEmail%>">
+            <label class="text-white" for="email">Email address</label>
+            <input type="email" class="form-control" name="email" id="email" value="<%=order.fromEmail%>">
           </div>
-        <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-        <select class="custom-select mr-sm-2" name="time" id="inlineFormCustomSelect">
+        <label class="mr-sm-2 sr-only" for="select">Time</label>
+        <select class="custom-select mr-sm-2" id="select" name="time" required>
           <option selected>Choose...</option>
           <option value="9:00 - 10:00">9:00 - 10:00</option>
           <option value="10:00 - 11:00">10:00 - 11:00</option>
@@ -132,8 +132,25 @@
       }
     })
     });
-document.getElementById('form').addEventListener('submit',(e)=>{
-    swal({
+document.getElementById('accept').addEventListener('click', async (e)=>{
+  e.preventDefault();
+  let email=document.getElementById('email').value;
+  let time=document.getElementById('select').value;
+  let data={
+    email,
+    time
+  };
+  console.log(data);
+  const res=await fetch('/api/order/<%=order.id%>',{
+        method:'POST',
+        headers : {
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      const datal = await res.json();
+      console.log(datal);
+  swal({
       title: "Order Accepted Successfully !!!",
       text:"time alloted to customer",
       icon: "success",
@@ -142,7 +159,6 @@ document.getElementById('form').addEventListener('submit',(e)=>{
         window.location.href="http://localhost:5000/shop/dashboard";
       }
     })
-    e.preventDefault();
 })
 
 document.getElementById('deliver').addEventListener('click',async (e)=>{

@@ -100,7 +100,6 @@ router.post('/',(req,res)=>{
 router.get('/dashboard',auth.User.authCheck,(req,res)=>{
   if(req.user.Updated){
     Shop.find({}).then((data)=>{
-      console.log(data);
       res.render('dashboard-user',{
         user : req.user,
         shopData : data

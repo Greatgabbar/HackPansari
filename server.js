@@ -95,7 +95,7 @@ app.put('/api/order/:id',(req,res)=>{
     const mailOptions = {
       from: 'customer.pansari@gmail.com', 
       to: data.fromEmail,
-      subject: "Order Declined",
+      subject: "Order Delevered",
       text: `Thanks ${data.fromName} ,
         For Using Our Platform
         regards
@@ -108,6 +108,29 @@ app.put('/api/order/:id',(req,res)=>{
         console.log('email sent!!!',data);
       }
     })
+  })
+})
+
+app.post('/api/order/:id',(req,res)=>{
+  console.log(req.body);
+  const { time,email } =req.body;
+  console.log(time,email);
+  res.json('Time allotted');
+  const mailOptions = {
+    from: 'customer.pansari@gmail.com', 
+    to: email,
+    subject: "Order Accepted",
+    text: ` Your Order Has Been Accepted 
+    and we alloted you a time slot of ${time}
+    and be carefully and wear mask always and 
+    please be on time else  your order get cancelled`
+  };
+  transporter.sendMail(mailOptions,(err,data)=>{
+    if(err){
+      console.log(err);
+    }else{
+      console.log('email sent!!!',data);
+    }
   })
 })
 

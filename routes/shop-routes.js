@@ -73,7 +73,6 @@ router.get('/dashboard',auth.Shop.authCheck,(req,res)=>{
    if(req.user.Updated){
      Order.find({to:req.user.id})
        .then((data)=>{
-         console.log(data);
          res.render('dashboard-shop',{
            user:req.user,
            orders:data
@@ -93,26 +92,6 @@ router.get('/dashboard/:id',auth.Shop.authCheck,(req,res)=>{
         user : req.user
       });
     })
-})
-
-router.post('/dashboard/:id',(req,res)=>{
-  const { time,email } =req.body;
-  const mailOptions = {
-    from: 'customer.pansari@gmail.com', 
-    to: email,
-    subject: "Order Accepted",
-    text: ` Your Order Has Been Accepted 
-    and we alloted you a time slot of ${time}
-    and be carefully and wear mask always and 
-    please be on time else  your order get cancelled`
-  };
-  transporter.sendMail(mailOptions,(err,data)=>{
-    if(err){
-      console.log(err);
-    }else{
-      console.log('email sent!!!',data);
-    }
-  })
 })
 
 
