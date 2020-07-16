@@ -91,7 +91,7 @@
         <div class="flex items-center py-2 border-b border-b-2 border-teal-500" id=${index}>
           <input class="border-none border-teal-500 appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" value=${oder.name} name="name-${index}" aria-label="Full name" disabled>
           <input class="appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="Number" value=${oder.quan} name="quan-${index}" aria-label="Full name" disabled>
-          <button class="delete flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button">
+          <button onclick="doDelete(${index});" class="delete flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button">
            Delete
           </button>            
         </div>
@@ -142,6 +142,11 @@
     })
      
 
-        
+    function doDelete(index){
+      console.log(order);
+      order.splice(index,1);
+      document.getElementById(index).remove();
+      console.log(order);
+    }  
    </script>
 </html>
