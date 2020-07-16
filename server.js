@@ -1,6 +1,7 @@
 const express=require('express');
 const app=express();
 const passport=require('passport');
+const Order=require('./models/Order');
 const mongoose=require('mongoose'); 
 const flash=require('connect-flash');
 const session=require('express-session');
@@ -8,6 +9,25 @@ const auth=require('./config/auth');
 const passportSetup = require('./config/passport-setup-shop');
 const Shop=require('./models/Shop');
 require('./config/passport-setup-shop-local')(passport);
+const bodyParser=require('body-parser');
+const nodemailer=require('nodemailer');
+
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: process.env.EMAIL || 'customer.pansari@gmail.com', 
+      pass: process.env.PASSWORD || 'Pansari@123'
+  }
+});
+
+
+
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json());
+
 
 mongoose.connect('mongodb+srv://root:9755@cluster0-n1q9f.mongodb.net/test?retryWrites=true&w=majority',{
   useNewUrlParser: true,
@@ -43,6 +63,30 @@ app.use((req,res,next)=>{
 app.use('/auth',require('./routes/auth-routes-shop'));
 
 app.use('/shop',require('./routes/shop-routes'));
+
+app.delete('/api/order/:id',(req,res)=>{
+  console.log(req.params.id);
+  Order.findById(req.params.id).then((data)=>{ 
+    const mailOptions = {
+      from: 'customer.pansari@gmail.com', 
+      to: data.fromEmail,
+      subject: "Order Declined",
+      text: `Dear ${data.fromName} ,
+        Your order has been declined , sorry for the inconvinence , Try again after some time`
+    };
+    transporter.sendMail(mailOptions,(err,data)=>{
+      if(err){
+        console.log(err);
+      }else{
+        console.log('email sent!!!',data);
+      }
+    })
+    data.remove();
+    res.json("Order Deleted");
+  }).catch((err)=>{
+    throw err;
+  })
+})
 
 const server=app.listen(5000,function(){
   console.log('running on port number 5000');

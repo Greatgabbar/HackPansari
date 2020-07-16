@@ -75,6 +75,17 @@ router.get('/dashboard',auth.Shop.authCheck,(req,res)=>{
 })
 
 
+router.get('/dashboard/:id',auth.Shop.authCheck,(req,res)=>{
+  Order.findById(req.params.id)
+    .then((data)=>{
+      res.render("shop-viewOrder",{
+        order:data,
+        user : req.user
+      });
+    })
+})
+
+
 router.get('/history',auth.Shop.authCheck,(req,res)=>{
 Order.find({to:req.user.id})
   .then((data)=>{

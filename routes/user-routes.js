@@ -72,7 +72,7 @@ router.post('/profile-update',(req,res)=>{
 })
 
 
-router.get('/dashboard/:id',(req,res)=>{
+router.get('/dashboard/:id',auth.User.authCheck,(req,res)=>{
   res.render('place-order',{
     shop_id:req.params.id,
     cust_id:req.user.id,

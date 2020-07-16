@@ -120,9 +120,6 @@ app.get('/api/shops',(req,res)=>{
       res.status(200).json(data);
     })
 })
-app.get('/gabbar',(req,res)=>{
-  res.render("shop-viewOrder");
-})
 
 const server=app.listen(4000,function(){
   console.log('running on port number 4000');
