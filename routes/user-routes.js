@@ -5,7 +5,7 @@ const User=require('../models/user');
 const passport=require('passport');
 const auth=require('../config/auth');
 const Shop=require('../models/Shop');
-
+const Order=require('../models/Order');
 
 router.get('/login',auth.User.revauthCheck,(req,res)=>{
   res.render('login-customer');
@@ -32,11 +32,21 @@ router.get('/profile',auth.User.authCheck,(req,res)=>{
 })
 
 
+router.get('/history',auth.User.authCheck,(req,res)=>{
+  Order.find({from:req.user.id})
+  .then((data)=>{
+    res.render('history-user',{
+      data,
+      user : req.user
+    });
+  })
+})
+
 
 router.post('/profile-update',(req,res)=>{
   const err=[];
   const {password,username,area,city,state,image} = req.body;
-  if(!password || !username || !area || !state || !city || !image){
+  if(!password || !username || !area || !state || !city){
     err.push('All fields are required');
   }
   if(password.length <6){

@@ -88,6 +88,29 @@ app.delete('/api/order/:id',(req,res)=>{
   })
 })
 
+app.put('/api/order/:id',(req,res)=>{
+  console.log(req.body);
+  Order.findOneAndUpdate({_id : req.params.id},{$set:{orderCompleted : true}},{upsert:true,new:true}).then((data)=>{
+    res.json('data Updates Successfully');
+    const mailOptions = {
+      from: 'customer.pansari@gmail.com', 
+      to: data.fromEmail,
+      subject: "Order Declined",
+      text: `Thanks ${data.fromName} ,
+        For Using Our Platform
+        regards
+        Pansari Team`
+    };
+    transporter.sendMail(mailOptions,(err,data)=>{
+      if(err){
+        console.log(err);
+      }else{
+        console.log('email sent!!!',data);
+      }
+    })
+  })
+})
+
 const server=app.listen(5000,function(){
   console.log('running on port number 5000');
 });

@@ -36,12 +36,12 @@
     <!--sidebar start-->
     <div class="sidebar">
         <center>
-            <img src="https://dl.dropboxusercontent.com/s/kst7tenijxc1fca/12.jpg?dl=0" class="profile_image" alt="">
-            <h4>Shop Owner</h4>
+            <img src="<%=user.image%>" class="profile_image" alt="">
+            <h4><%=user.shopname%></h4>
         </center>
         <a href="/shop/dashboard"><i class="fa fa-desktop"></i><span>Dashboard</span></a>
         <a href="/shop/profile-update"><i class="fa fa-sliders"></i><span>Profile</span></a>
-        <a href="#"><i class="fa fa-history"></i><span>History</span></a>
+        <a href="/shop/history"><i class="fa fa-history"></i><span>History</span></a>
         <a href="/shop/logout"><i class="fa fa-sign-out"></i><span>Logout</span></a>
     </div>
     <!--sidebar end-->
@@ -71,22 +71,41 @@
                 </tbody>
             </table>
             <div class="text-center m-3">
-                <form action="" class="m-3">
-                    <select name="timeSlot" id="timeSlot">
-                        <option value="9">9 pm</option>
-                        <option value="10">10 pm</option>
-                        <option value="11">11 pm</option>
-                        <option value="12">12 pm</option>
-                        <option value="13">1 pm</option>
-                    </select>
-                
-                <button id="decline" class="btn btn-danger m-2">Decline</button>
-                <input type="submit"  id="accept" class="btn btn-primary m-2" value="Accept"/>
-                <button id="delivered" class="btn btn-success m-2">Delivered</button>
-            </form>
+               <!-- form -->
+<form id="form" method="POST">
+    <div class="form-row align-items-center">
+      <div class="col-auto my-1">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Email address</label>
+            <input type="email" class="form-control" name="email" id="exampleFormControlInput1" value="<%=order.fromEmail%>">
+          </div>
+        <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+        <select class="custom-select mr-sm-2" name="time" id="inlineFormCustomSelect">
+          <option selected>Choose...</option>
+          <option value="9:00 - 10:00">9:00 - 10:00</option>
+          <option value="10:00 - 11:00">10:00 - 11:00</option>
+          <option value="11:00 - 12:00">11:00 - 12:00</option>
+          <option value="12:00 - 13:00">12:00 - 13:00</option>
+          <option value="13:00 - 14:00">13:00 - 14:00</option>
+          <option value="14:00 - 15:00">14:00 - 15:00</option>
+          <option value="15:00 - 16:00">15:00 - 16:00</option>
+          <option value="16:00 - 17:00">16:00 - 17:00</option>
+        </select>
+      </div>
+      <div class="col-auto my-1">
+        <input type="submit"  id="accept" class="btn btn-primary m-2" value="Accept"/>
+      </div>
+    </div>
+  </form>
+
+            <button id="decline" class="btn btn-danger m-2">Decline</button>
+            <button id="deliver" class="btn btn-success m-2">Delivered</button>
             </div>
         </div>
     </div>
+
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -106,6 +125,38 @@
       console.log(data);
       swal({
       title: "Order Deleted Successfully !!!",
+      icon: "success",
+    }).then((data)=>{
+      if(data){
+        window.location.href="http://localhost:5000/shop/dashboard";
+      }
+    })
+    });
+document.getElementById('form').addEventListener('submit',(e)=>{
+    swal({
+      title: "Order Accepted Successfully !!!",
+      text:"time alloted to customer",
+      icon: "success",
+    }).then((data)=>{
+      if(data){
+        window.location.href="http://localhost:5000/shop/dashboard";
+      }
+    })
+    e.preventDefault();
+})
+
+document.getElementById('deliver').addEventListener('click',async (e)=>{
+        const res=await fetch('/api/order/<%=order.id%>',{
+        method:'PUT',
+        headers : {
+          'Content-Type':'application/json',
+          body: JSON.stringify('order deliverd')
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      swal({
+      title: "Order Delivered Successfully !!!",
       icon: "success",
     }).then((data)=>{
       if(data){

@@ -11,7 +11,7 @@
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/shop-sidebar.css">
     <link rel="stylesheet" href="/assets/css/shop-history.css">
-    <title>DashBoard | Shop</title>
+    <title>History | Shop</title>
 </head>
 
 <body>
@@ -34,8 +34,8 @@
     <!--sidebar start-->
     <div class="sidebar">
         <center>
-            <img src="https://dl.dropboxusercontent.com/s/kst7tenijxc1fca/12.jpg?dl=0" class="profile_image" alt="">
-            <h4>Shop Owner</h4>
+            <img src="<%=user.image%>" class="profile_image" alt="">
+            <h4><%=user.shopname%></h4>
         </center>
         <a href="/shop/dashboard"><i class="fa fa-desktop"></i><span>Dashboard</span></a>
         <a href="/shop/profile-update"><i class="fa fa-sliders"></i><span>Profile</span></a>

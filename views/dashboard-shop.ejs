@@ -41,7 +41,7 @@
       <img src="<%=user.image%>" class="profile_image" alt="">
       <h4><%=user.shopname%></h4>
     </center>
-    <a href="#"><i class="fa fa-desktop"></i><span>Dashboard</span></a>
+    <a href="/shop/dashboard"><i class="fa fa-desktop"></i><span>Dashboard</span></a>
     <a href="/shop/profile"><i class="fa fa-sliders"></i><span>Profile</span></a>
     <a href="/shop/history"><i class="fa fa-history"></i><span>History</span></a>
     <a href="/shop/logout"><i class="fa fa-sign-out"></i><span>Logout</span></a>
@@ -50,6 +50,7 @@
   <div class="content">
     <div id="card-deck">
   <%orders.forEach((order)=>{%>
+    <%if(order.orderCompleted){%>
       <div class="card" data-toggle="modal" data-target="#<%=order.id%>">
         <div class="card-body">
           <h5 class="card-title"><a href="/shop/dashboard/<%=order.id%>"><%=order.fromName%></a></h5>
@@ -60,7 +61,7 @@
           </p>
         </div>
       </div>
-      
+    <%}%>
 <%})%>
 </div> 
 </div>

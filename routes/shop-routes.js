@@ -4,6 +4,16 @@ const Shop=require('../models/Shop');
 const passport=require('passport');
 const auth=require('../config/auth');
 const Order=require('../models/Order');
+const nodemailer=require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: process.env.EMAIL || 'customer.pansari@gmail.com', 
+      pass: process.env.PASSWORD || 'Pansari@123'
+  }
+});
+
 
 
 router.get('/login',auth.Shop.revauthCheck,(req,res)=>{
@@ -83,6 +93,28 @@ router.get('/dashboard/:id',auth.Shop.authCheck,(req,res)=>{
         user : req.user
       });
     })
+})
+
+router.post('/dashboard/:id',(req,res)=>{
+  const { time,email } =req.body;
+
+  console.log(req.body);
+  const mailOptions = {
+    from: 'customer.pansari@gmail.com', 
+    to: email,
+    subject: "Order Accepted",
+    text: ` Your Order Has Been Accepted 
+    and we alloted you a time slot of ${time}
+    and be carefully and wear mask always and 
+    please be on time else  your order get cancelled`
+  };
+  transporter.sendMail(mailOptions,(err,data)=>{
+    if(err){
+      console.log(err);
+    }else{
+      console.log('email sent!!!',data);
+    }
+  })
 })
 
 
