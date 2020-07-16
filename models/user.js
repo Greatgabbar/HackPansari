@@ -10,7 +10,10 @@ const userSchema= new Schema({
     default : Date.now
   },
   googleid : String,
-  image : String,
+  image : {
+    type:String,
+    default: "https://dl.dropboxusercontent.com/s/gh4dfzfxcqbz6pl/43.jpeg?dl=0"
+  },
   username:String,
   City :String,
   State : String,

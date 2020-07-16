@@ -11,7 +11,10 @@ const shopSchema= new Schema({
   },
   googleid : String,
   shopname : String,
-  image : String,
+  image : {
+    type : String,
+    default:" https://dl.dropboxusercontent.com/s/xe13w1ost241oyi/42.jpeg?dl=0",
+  },
   Updated:String,
   City :String,
   State : String,
