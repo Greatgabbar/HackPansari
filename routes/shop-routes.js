@@ -61,7 +61,6 @@ router.post('/profile-update',(req,res)=>{
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash(password, salt, function(err, hash) { 
               Shop.findOneAndUpdate({email : req.user.email},{$set:{pass : hash,shopname,Area : area,City : city,State:state,image,Updated:true}},{upsert:true,new:true}).then((data)=>{
-                 console.log('data update :::' + data);
                  res.redirect('/shop/dashboard');
               }) 
           });
@@ -74,6 +73,7 @@ router.get('/dashboard',auth.Shop.authCheck,(req,res)=>{
    if(req.user.Updated){
      Order.find({to:req.user.id})
        .then((data)=>{
+         console.log(data);
          res.render('dashboard-shop',{
            user:req.user,
            orders:data
@@ -97,8 +97,6 @@ router.get('/dashboard/:id',auth.Shop.authCheck,(req,res)=>{
 
 router.post('/dashboard/:id',(req,res)=>{
   const { time,email } =req.body;
-
-  console.log(req.body);
   const mailOptions = {
     from: 'customer.pansari@gmail.com', 
     to: email,
@@ -122,7 +120,8 @@ router.get('/history',auth.Shop.authCheck,(req,res)=>{
 Order.find({to:req.user.id})
   .then((data)=>{
     res.render('history-shop',{
-      data
+      data,
+      user:req.user
     });
   })
 })
