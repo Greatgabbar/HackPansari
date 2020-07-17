@@ -134,6 +134,8 @@ app.post('/api/order/:id',(req,res)=>{
   })
 })
 
-const server=app.listen(5000,function(){
+const PORT=process.env.PORT || 5000;
+
+const server=app.listen(PORT,function(){
   console.log('running on port number 5000');
 });
