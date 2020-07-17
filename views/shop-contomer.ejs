@@ -4,7 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="manifest" href="/assets/manifest.webmanifest">
   <title>Document</title>
+  <script>
+    //         navigator.serviceWorker &&
+    // navigator.serviceWorker.register('/public/assets/SW.js').then(function (registration)
+    // {
+    // });
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+            .register('/SW.js', { scope: '/'})
+            .then(() => {
+                console.info('Developer for Life Service Worker Registered');
+            }, err => console.error("Developer for Life Service Worker registration failed: ", err));
+    
+        navigator.serviceWorker
+            .ready
+            .then(() => {
+                console.info('Developer for Life Service Worker Ready');
+            });
+    }
+        </script>
 </head>
 <body class="ml-20">
   <div class="mt-4 border-b pb-4">
