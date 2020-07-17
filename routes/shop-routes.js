@@ -4,16 +4,6 @@ const Shop=require('../models/Shop');
 const passport=require('passport');
 const auth=require('../config/auth');
 const Order=require('../models/Order');
-const nodemailer=require('nodemailer');
-
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-      user: process.env.EMAIL || 'customer.pansari@gmail.com', 
-      pass: process.env.PASSWORD || 'Pansari@123'
-  }
-});
-
 
 
 router.get('/login',auth.Shop.revauthCheck,(req,res)=>{
