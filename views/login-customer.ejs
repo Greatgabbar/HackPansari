@@ -8,6 +8,26 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="manifest" href="/assets/manifest.webmanifest">
+    <script>
+//         navigator.serviceWorker &&
+// navigator.serviceWorker.register('/public/assets/SW.js').then(function (registration)
+// {
+// });
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/SW.js', { scope: '/'})
+        .then(() => {
+            console.info('Developer for Life Service Worker Registered');
+        }, err => console.error("Developer for Life Service Worker registration failed: ", err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('Developer for Life Service Worker Ready');
+        });
+}
+    </script>
 </head>
 <body>
 

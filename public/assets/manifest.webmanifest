@@ -1,0 +1,17 @@
+{
+    "name": "Pansari",
+    "short_name": "PS",
+    "icons": [
+        {
+            "src": "images/icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+       
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#ffffff",
+    "theme_color": "#96f2d7"
+}
