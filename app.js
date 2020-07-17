@@ -58,11 +58,9 @@ app.use((req,res,next)=>{
 })
 
 app.use('/auth',require('./routes/auth-routes'));
-app.use('/auth',require('./routes/auth-routes-shop'));
 
 app.use('/user',require('./routes/user-routes'));
 
-app.use('/shop',require('./routes/shop-routes'));
 
 app.get('/chat',(req,res)=>{
   res.sendFile(__dirname + '/public/assets/index.html');
