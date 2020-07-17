@@ -96,7 +96,7 @@ Order.find({to:req.user.id})
 })
 
 router.get('/profile',auth.Shop.authCheck,(req,res)=>{
-  res.render('profileUpdate-shop')
+  res.render('profileUpdate-shop',{user:req.user});
 })
 
 router.get('/logout',(req,res)=>{
