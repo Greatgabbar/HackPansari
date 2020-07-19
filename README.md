@@ -16,7 +16,7 @@
 <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat">
 </p>
 
-## Interface to fulfill the gernal demands of the public while ensuring their safety during the pandemic times
+## <h1 align="center">Interface to fulfill the gernal demands of the public while ensuring their safety during the pandemic times</h1>
 
 # So, What is this Project all About or What is Pansari ?
 
