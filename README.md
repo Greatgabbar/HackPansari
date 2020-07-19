@@ -5,9 +5,9 @@
 
 <img src="https://img.shields.io/npm/v/npm">
 
-<img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
-
 <img src="https://img.shields.io/github/stars/greatgabbar/HackPansari.svg?style=flat">
+
+<img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" >
 
 <img src="https://img.shields.io/github/languages/top/greatgabbar/HackPansari.svg">
 
