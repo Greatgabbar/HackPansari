@@ -1,4 +1,4 @@
-# <img src="./public/assets/images/PansariLogo-01.svg" align="center" width="40%"/> 
+# <p align="center"> <img src="./public/assets/images/PansariLogo-01.svg" align="center" width="20%"/> </p> 
 <p align="center"> 
 
 <img src="https://img.shields.io/badge/made%20by-LocalHost-blue.svg" >
