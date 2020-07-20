@@ -11,13 +11,13 @@ const Shop=require('./models/Shop');
 require('./config/passport-setup-shop-local')(passport);
 const bodyParser=require('body-parser');
 const nodemailer=require('nodemailer');
-
+require('dotenv').config();
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-      user: process.env.EMAIL || 'customer.pansari@gmail.com', 
-      pass: process.env.PASSWORD || 'Pansari@123'
+      user: process.env.EMAIL, 
+      pass: process.env.PASSWORD
   }
 });
 
@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 
-mongoose.connect('mongodb+srv://root:9755@cluster0-n1q9f.mongodb.net/test?retryWrites=true&w=majority',{
+mongoose.connect(process.env.MONGO,{
   useNewUrlParser: true,
   useUnifiedTopology: true
 });

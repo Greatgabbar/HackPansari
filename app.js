@@ -13,18 +13,20 @@ const passportSet=require('./config/passport-setup');
 require('./config/passport-setup-local')(passport);
 const Order=require('./models/Order');
 const nodemailer=require('nodemailer');
+require('dotenv').config();
+
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-      user: process.env.EMAIL || 'customer.pansari@gmail.com', 
-      pass: process.env.PASSWORD || 'Pansari@123'
+      user: process.env.EMAIL, 
+      pass: process.env.PASSWORD
   }
 });
 
 
 
-mongoose.connect('mongodb+srv://root:9755@cluster0-n1q9f.mongodb.net/test?retryWrites=true&w=majority',{
+mongoose.connect(process.env.MONGO,{
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
