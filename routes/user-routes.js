@@ -22,6 +22,7 @@ router.post('/login', (req, res, next) => {
 
 
 router.get('/profile-update',auth.User.authCheck,(req,res)=>{
+  console.log(req.user);
   res.render('profileUpdate-user',{user:req.user});
 });
 
@@ -45,6 +46,7 @@ router.get('/history',auth.User.authCheck,(req,res)=>{
 
 router.post('/profile-update',(req,res)=>{
   const err=[];
+  console.log(req.body);
   const {password,username,area,city,state,image} = req.body;
   if(!password || !username || !area || !state || !city){
     err.push('All fields are required');
@@ -57,17 +59,18 @@ router.post('/profile-update',(req,res)=>{
       if(user){
         err.push('Username is not Available');
       }
-
+      user={
+        password,
+        username,
+        city,
+        state,
+        image,
+        area,
+        err
+      }
       if(err.length>0){
-        res.render('profileUpdate-user',{
-          password,
-          username,
-          city,
-          state,
-          image,
-          area,
-          err
-        });
+        console.log(err);
+        res.render('profileUpdate-user',{user:user});
       }else{
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash(password, salt, function(err, hash) { 
