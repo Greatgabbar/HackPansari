@@ -163,7 +163,7 @@ float: left;
 }
 .testimonials .cards{
   display: flex;
-  margin: 0px 10em;
+  margin: 0px 25em;
   color: rgba(0 , 0, 0, .6);
 }
 .testimonials .cards .card-1{
@@ -299,7 +299,7 @@ color: rgba(0 , 0, 0, .6);
   font-size: 20px;
 }
 .team{
-  margin: 10em;
+  margin: 10em 30em;
   text-align: center;
   color: black;
   
