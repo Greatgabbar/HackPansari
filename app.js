@@ -73,7 +73,8 @@ app.get('/api/users',(req,res)=>{
 })
 
 app.post('/api/order',(req,res)=>{
-  const {orders,to,from} = req.body;
+  const {orders,to,from,address} = req.body;
+  console.log(req.body);
   const mailOptions = {
     from: 'customer.pansari@gmail.com', 
     to: from.email,
@@ -94,7 +95,8 @@ app.post('/api/order',(req,res)=>{
     from:from.id,
     fromName: from.name,
     fromLocation: from.location,
-    fromEmail:from.email
+    fromEmail:from.email,
+    address:address
   })
   order.save().then((data)=>{
     res.send(data);

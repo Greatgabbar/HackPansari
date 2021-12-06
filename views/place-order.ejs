@@ -16,12 +16,32 @@
    </head>
    
    <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+     
       <div class="flex md:flex-row-reverse flex-wrap">
 		
 		 <!--Main Content-->
          <div class="w-full md:w-4/5 bg-gray-100">
             <div class="container bg-gray-100 pt-16 px-6">
+              <h2 class="text-5xl text-center text-black font-semibold mb-5">Crowd Status</h2>
               <!-- form order -->
+              <table class="table-fixed font-mono">
+                <thead>
+                  <tr>
+                    <th class="w-1/2 ...">Time Slot</th>
+                    <th class="w-1/4 ...">Number of person</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(const prop in times){%>
+                  <tr class="bg-blue-200">  
+                    <td><%=prop%></td>
+                    <td><%=times[prop]%></td>
+                  </tr>
+                  <%}%>
+                  
+                </tbody>
+              </table>
+              
               <div>
                 <h2 class="text-5xl text-center text-black font-semibold mb-5">Place Orders</h2>
                 <form class="w-full w-2xl text-center" id="form">
@@ -119,25 +139,71 @@
           id:"<%=shop_id%>",
         }
       }
-      console.log(2,data);
+    //   console.log(2,data);
 
-     const res=await fetch('/api/order',{
-        method:'POST',
-        headers : {
-          'Content-Type':'application/json'
-        },
-        body:JSON.stringify(data)
-      });
-    const datal=await res.json();
-    console.log(datal);
     swal({
-      title: "Order Placed Successfully !!!",
-      text: "Thanx for ordering",
-      icon: "success",
-    }).then((data)=>{
-      if(data){
-        window.location.href="/user/dashboard";
+      title:"Choose An option from he below !!",
+      buttons: {
+      pickUp: {
+        text: "PickUp",
+        value: "pick",
+      },
+      catch: {
+        text: "Home Delivery",
+        value: "home",
       }
+    }
+    }).then((gg)=>{
+        console.log(gg)
+        if(gg==="pick"){
+          swal({
+            title: "Order Placed Successfully !!!",
+            text: "Thanx for ordering",
+            icon: "success"
+          }).then(async ggg=>{
+            const res=await fetch('/api/order',{
+              method:'POST',
+              headers : {
+              'Content-Type':'application/json'
+            },
+              body:JSON.stringify(data)
+            });
+            const datal=await res.json();
+            console.log(datal);
+            window.location.href="/user/dashboard";
+          })
+          }else{
+            swal({
+              text: 'Enter The Home addresss".',
+              content: "input",
+              button: {
+              text: "Place Order!",
+              closeModal: false,
+            },
+          }).then(async value=>{
+            console.log(value);
+            data.address=value
+            const res=await fetch('/api/order',{
+              method:'POST',
+              headers : {
+              'Content-Type':'application/json'
+            },
+              body:JSON.stringify(data)
+            });
+            const datal=await res.json();
+            console.log(datal);
+            swal({
+            title: "Order Placed Successfully !!!",
+            text: `Thanx for ordering Your Address \n ${value}`,
+            icon: "success"
+          }).then(data=>{
+            window.location.href="/user/dashboard";
+          })
+          })
+          }
+      // if(data){
+      //   window.location.href="/user/dashboard";
+      // }
     })
     })
      

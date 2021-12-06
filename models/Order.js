@@ -20,6 +20,12 @@ const orderSchema=new Schema({
   to:{
     type:String
   },
+  address:{
+    type:String
+  },
+  time:{
+    type:String
+  },
   date:{
     type:Date,
     default:Date.now()

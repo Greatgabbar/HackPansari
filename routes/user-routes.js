@@ -85,13 +85,30 @@ router.post('/profile-update',(req,res)=>{
 })
 
 
-router.get('/dashboard/:id',auth.User.authCheck,(req,res)=>{
+router.get('/dashboard/:id',auth.User.authCheck,async (req,res)=>{
+  const times={
+        "9:00 - 10:00":0,
+        "10:00 - 11:00":0,
+        "11:00 - 12:00":0,
+       "12:00 - 13:00":0,
+        "13:00 - 14:00":0,
+        "14:00 - 15:00":0,
+        "15:00 - 16:00":0,
+        "16:00 - 17:00":0
+  }
+const orders=await Order.find({to:req.params.id,orderAccepted:true});
+orders.forEach((data)=>{
+  times[data.time]=times[data.time]+1
+})
+console.log(times);
+  console.log(req.user)
   res.render('place-order',{
     shop_id:req.params.id,
     cust_id:req.user.id,
     cust_email:req.user.email,
     cust_name:req.user.name,
-    cust_location:req.user.City
+    cust_location:req.user.City,
+    times:times
   });
 })
 

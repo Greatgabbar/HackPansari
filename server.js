@@ -111,10 +111,11 @@ app.put('/api/order/:id',(req,res)=>{
   })
 })
 
-app.post('/api/order/:id',(req,res)=>{
+app.post('/api/order/:id',async (req,res)=>{
   console.log(req.body);
   const { time,email } =req.body;
   console.log(time,email);
+  let gg=await Order.findOneAndUpdate({_id : req.params.id},{$set:{orderAccepted : true,time:time}},{upsert:true,new:true})
   res.json('Time allotted');
   const mailOptions = {
     from: 'customer.pansari@gmail.com', 
