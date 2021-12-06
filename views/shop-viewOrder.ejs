@@ -115,22 +115,35 @@
 </body>
 <script>
     document.getElementById('decline').addEventListener('click',async (e)=>{
-        const res=await fetch('/api/order/<%=order.id%>',{
-        method:'DELETE',
+        
+      swal({
+              text: 'Enter The Comment If You want to add".',
+              content: "input",
+              button: {
+              text: "Comment!",
+              closeModal: false,
+            },
+          }).then(async value=>{
+            const res=await fetch('/api/order/delete/<%=order.id%>',{
+              method:'POST',
         headers : {
           'Content-Type':'application/json'
         },
+        body: JSON.stringify({comment : value})
       });
       const data = await res.json();
       console.log(data);
-      swal({
-      title: "Order Deleted Successfully !!!",
-      icon: "success",
-    }).then((data)=>{
-      if(data){
-        window.location.href="/shop/dashboard";
-      }
-    })
+            swal({
+            title: "Order Deleted Successfully !!!",
+            text:`Comment : ${value}`,
+            icon: "success",
+          }).then((data)=>{
+            if(data){
+              window.location.href="/shop/dashboard";
+            }
+          })
+
+          })
     });
 document.getElementById('accept').addEventListener('click', async (e)=>{
   e.preventDefault();

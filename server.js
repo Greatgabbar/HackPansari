@@ -64,7 +64,7 @@ app.use('/auth',require('./routes/auth-routes-shop'));
 
 app.use('/shop',require('./routes/shop-routes'));
 
-app.delete('/api/order/:id',(req,res)=>{
+app.post('/api/order/delete/:id',(req,res)=>{
   console.log(req.params.id);
   Order.findById(req.params.id).then((data)=>{ 
     const mailOptions = {
@@ -72,7 +72,8 @@ app.delete('/api/order/:id',(req,res)=>{
       to: data.fromEmail,
       subject: "Order Declined",
       text: `Dear ${data.fromName} ,
-        Your order has been declined , sorry for the inconvinence , Try again after some time`
+        Your order has been declined , sorry for the inconvinence , Try again after some time
+        Message from Shopkeeper : ${req.body.comment}`
     };
     transporter.sendMail(mailOptions,(err,data)=>{
       if(err){
