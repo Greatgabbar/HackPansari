@@ -34,9 +34,25 @@ we have decided to create a user interface in the form of website ( later on an 
 4. Kepp Track of No. of person in the respective stores at that moment 
 5. Generate passes to ensure the stores hassel free.
 
+## Methodology
+<h1 align="center" > 
+    <img src="./public/assets/images/dfd1.jpeg" alt="dfd" width="400px" />
+</h1>
+
+## Live Link 
+live link :- https://pansari.onrender.com
+
 ## Project setup
 
 ```
 npm install
 npm run dev
 ```
+
+## ScreenShot of Interface 
+
+<h1 align="center" > 
+    <img src="./public/assets/images/ss1.png" alt="dfd" width="200px" />
+    <img src="./public/assets/images/ss2.png" alt="dfd" width="200px" />
+    <img src="./public/assets/images/ss3.png" alt="dfd" width="200px" />
+</h1>
